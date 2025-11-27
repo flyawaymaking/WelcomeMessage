@@ -3,20 +3,17 @@ package com.flyaway.welcomemessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class WelcomeMessage extends JavaPlugin {
-    private MessageManager messageManager;
-    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
-        // Инициализируем менеджеры
-        this.configManager = new ConfigManager(this);
-        this.messageManager = new MessageManager(this);
+        ConfigManager configManager = new ConfigManager(this);
+        MessageManager messageManager = new MessageManager(this);
 
-        // Регистрируем события
-        getServer().getPluginManager().registerEvents(new PlayerListener(messageManager, configManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(configManager, messageManager), this);
 
-        // Команда для перезагрузки конфига
-        getCommand("welcomemessage").setExecutor(new ReloadCommand(configManager));
+        ReloadCommand reloadCommand = new ReloadCommand(configManager, messageManager);
+        getCommand("welcomemessage").setExecutor(reloadCommand);
+        getCommand("welcomemessage").setTabCompleter(reloadCommand);
 
         getLogger().info("WelcomeMessage включён!");
     }

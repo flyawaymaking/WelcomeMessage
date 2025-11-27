@@ -3,31 +3,47 @@ package com.flyaway.welcomemessage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ReloadCommand implements CommandExecutor {
+public class ReloadCommand implements CommandExecutor, TabCompleter {
     private final ConfigManager configManager;
+    private final MessageManager messageManager;
 
-    public ReloadCommand(ConfigManager configManager) {
+    public ReloadCommand(ConfigManager configManager, MessageManager messageManager) {
         this.configManager = configManager;
+        this.messageManager = messageManager;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("welcomemessage.reload")) {
-                sender.sendMessage(Component.text("У вас нет прав для этой команды!", NamedTextColor.RED));
+                sender.sendMessage(messageManager.toComponent(configManager.getMessage("no-permissions")));
                 return true;
             }
 
             configManager.reloadConfig();
-            sender.sendMessage(Component.text("Конфиг WelcomeMessage перезагружен!", NamedTextColor.GREEN));
+            sender.sendMessage(messageManager.toComponent(configManager.getMessage("config-reloaded")));
             return true;
         }
 
-        sender.sendMessage(Component.text("Использование: /welcomemessage reload", NamedTextColor.YELLOW));
+        sender.sendMessage(messageManager.toComponent(configManager.getMessage("usage")));
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        List<String> completions = new ArrayList<>();
+
+        if (args.length == 1) {
+            if (sender.hasPermission("welcomemessage.reload")) {
+                completions.add("reload");
+            }
+        }
+
+        return completions;
     }
 }

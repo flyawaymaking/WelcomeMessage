@@ -6,7 +6,6 @@ public class ConfigManager {
     private final WelcomeMessage plugin;
     private FileConfiguration config;
 
-    // Сообщения из конфига
     private String welcomeMessage;
     private String firstTimeMessage;
     private String quitMessage;
@@ -29,21 +28,24 @@ public class ConfigManager {
     }
 
     private void loadMessages() {
-        welcomeMessage = config.getString("welcome-message", "&fзашёл на сервер!");
-        firstTimeMessage = config.getString("first-time-message", "&fзашёл на сервер впервые!");
-        quitMessage = config.getString("quit-message", "&fвышел с сервера.");
+        welcomeMessage = config.getString("welcome-message", "<green>зашёл на сервер!");
+        firstTimeMessage = config.getString("first-time-message", "<green>зашёл на сервер впервые!");
+        quitMessage = config.getString("quit-message", "<red>вышел с сервера.");
     }
 
-    // Методы для получения сообщений (без имени игрока, так как оно будет добавляться отдельно)
-    public String getWelcomeMessage(String playerName) {
+    public String getWelcomeMessage() {
         return welcomeMessage;
     }
 
-    public String getFirstTimeMessage(String playerName) {
+    public String getFirstTimeMessage() {
         return firstTimeMessage;
     }
 
-    public String getQuitMessage(String playerName) {
+    public String getQuitMessage() {
         return quitMessage;
+    }
+
+    public String getMessage(String key) {
+        return config.getString("messages." + key, "<red>message-" + key + " not found");
     }
 }

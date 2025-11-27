@@ -1,7 +1,5 @@
 # Сообщения при входе и выходе игроков
-# Доступно форматирование: цвета (&a, &b и т.д.), градиенты (<gradient:#FF0000:#0000FF>текст</gradient>)
-# HEX цвета: <#FF00FF>текст</#FF00FF>
-# Теги форматирования: <bold>, <italic>, <underlined> и т.д.
+# Поддержка MiniMessage формата: https://docs.advntr.dev/minimessage/format.html
 # Чтобы скрыть сообщение нужно указать "", например: quit-message: ""
 
 # Формат отображения сообщений
@@ -13,6 +11,11 @@
 message-format: "%prefix%%player%%suffix% %message%"
 
 # Основные сообщения
-welcome-message: "&aзашёл на сервер!"
-first-time-message: "&a&lзашёл на сервер впервые!"
-quit-message: "&cвышел с сервера."
+welcome-message: "<green>зашёл на сервер!"
+first-time-message: "<green><bold>зашёл на сервер впервые!"
+quit-message: "<red>вышел с сервера."
+
+messages:
+  no-permissions: "<red>У вас нет прав для этой команды!"
+  config-reloaded: "<green>Конфиг WelcomeMessage перезагружен!"
+  usage: "<yellow>Использование: /welcomemessage reload"
