@@ -1,9 +1,9 @@
 # WelcomeMessage | Кастомные сообщения входа
 
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-green)](https://www.minecraft.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.10-green)](https://www.minecraft.net/)
 [![Paper](https://img.shields.io/badge/Paper-Server-orange)](https://papermc.io/)
 
-Плагин для серверов Minecraft Paper 1.21.8, который заменяет стандартные сообщения о входе и выходе игроков на кастомные с поддержкой современного форматирования, градиентов и совместимостью с LuckPerms.
+Плагин для серверов Minecraft Paper 1.21.10, который заменяет стандартные сообщения о входе и выходе игроков на кастомные с поддержкой современного форматирования, градиентов и совместимостью с LuckPerms.
 
 ## 📖 Описание
 
@@ -83,7 +83,7 @@ message-format: "<gold>✨ <yellow>%player%<gold> %message%"
 
 ## 🔗 Совместимость
 
-- **🎮 Minecraft**: 1.21.8
+- **🎮 Minecraft**: 1.21.10
 - **🖥️ Server**: Paper
 - **☕ Java**: 21
 - **📦 Dependencies**: LuckPerms (опционально), Essentials (опционально)
